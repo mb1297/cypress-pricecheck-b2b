@@ -1,0 +1,21 @@
+{
+  "name": "cypress-pricecheck",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^10.10.0",
+    "cypress-postgres": "^1.1.1",
+    "pg": "^8.8.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "soft-assert": "^0.2.6"
+  }
+}
