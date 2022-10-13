@@ -15,8 +15,8 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-const pgp = require('pg-promise')();
-const postgressConfig = require('../../cypress.config');
+const pgp = require("pg-promise")()
+const postgressConfig = require("../../cypress.config")
 
 function dbConnection (query,userDefineConnection)  {
     let connection = postgressConfig.db
@@ -30,5 +30,5 @@ function dbConnection (query,userDefineConnection)  {
 module.exports = on => {
     on("task", {
         dbQuery:(query)=> dbConnection(query.query,query.connection)
-    });
-};
+    })
+}
