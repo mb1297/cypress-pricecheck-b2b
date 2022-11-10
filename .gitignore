@@ -2,3 +2,4 @@
 **/.idea
 **/report/
 /cypress/results/
+cypress/videos/

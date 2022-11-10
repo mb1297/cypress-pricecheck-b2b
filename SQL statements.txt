@@ -1,0 +1,26 @@
+CREATE TABLE prices_it_b2b (
+    productId int,
+    qev varchar PRIMARY KEY,
+    net float,
+    gross float,
+    taxRate float,
+	currency varchar,
+    runtime varchar,
+    runtimeUnit varchar
+)
+
+insert into prices_it_b2b
+VALUES
+    (700,'QEV111AIYQIY',72.95,89.00,22.0,'EUR',1,'year'),
+    (700,'QEV111AIYQIZ',171.31,209.00,22.0,'EUR',3,'years'),
+    (700,'QEV111AIYQI1',7.30,8.90,22.0,'EUR',1,'month'),
+    (701,'QEV111AIYQI3',113.93,139.00,22.0,'EUR',1,'year'),
+    (701,'QEV111AIYQI4',269.67,329.00,22.0,'EUR',3,'years'),
+    (701,'QEV111AIYQI5',11.39,13.90,22.0,'EUR',1,'month'),
+    (551,'QEV111AJNBY4',65.57,80.00,22.0,'EUR',1,'year'),
+    (551,'QEV111AJNBY5',154.92,189.00,22.0,'EUR',3,'years'),
+    (551,'QEV111AJNBY8',6.56,8.00,22.0,'EUR',1,'month'),
+    (607,'QEV111AIAYC8',40.16,49.00,22.0,'EUR',3,'years'),
+    (607,'QEV111AIYQJ9',1.56,1.90,22.0,'EUR',1,'month'),
+    (602,'QEV111AHWVDX',297.54,363.00,22.0,'EUR',999,'years'),
+    (601,'QEV111AHWVEH',198.36,242.00,22.0,'EUR',999,'years')

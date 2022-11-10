@@ -1,12 +1,11 @@
-describe('FT_Price check', () => {
+describe("FT_Price check", () => {
 
-  it('Check product offering', function () {
+
+  it("Check product offering", function () {
       cy.task("dbQuery", {"query": "CREATE TABLE prices_it_b2b_actual (productId int, qev varchar PRIMARY KEY, net float, gross float, taxRate float, currency varchar, runtime int, runtimeUnit varchar)"})
-
-      cy.request("GET", "https://shop-preprod.mercedes-benz.com/dcpconb2b-api/dcp-api/v2/dcp-mbcb2b-it/products").then((response) => {
+      cy.request("GET", Cypress.env("preprod_api")+Cypress.env("base_store")+"/products").then((response) => {
           for (var i = 0; i < response.body.products.length ; i++) {
-                      
-              cy.request("GET", "https://shop-preprod.mercedes-benz.com/dcpconb2b-api/dcp-api/v2/dcp-mbcb2b-it/users/anonymous/connect/products/"+response.body.products[i].code+"?fields=FULL&lang=it_IT").then((response) => {  
+              cy.request("GET", Cypress.env("preprod_api")+Cypress.env("base_store")+"/users/anonymous/connect/products/"+response.body.products[i].code+"?fields=FULL&lang="+Cypress.env("language")).then((response) => {  
               for (var j = 0; j < response.body.variantOptions.length; j++) {
                   cy.wrap(response.body.variantOptions[j].price.priceDetail.netPrice).as("actualNetPrice")
                   cy.wrap(response.body.variantOptions[j].price.priceDetail.grossPrice).as("actualGrossPrice")
@@ -15,12 +14,13 @@ describe('FT_Price check', () => {
                   cy.wrap(response.body.variantOptions[j].license.duration).as("actualRuntime")
                   cy.wrap(response.body.variantOptions[j].license.unit_en).as("actualRuntimeUnit")
                   cy.wrap(response.body.variantOptions[j].code).as("qev")
+                  cy.wrap(Cypress.env("market")).as("market")
 
-                      cy.task("dbQuery", {"query": "SELECT net, gross, taxRate, currency, runtime, runtimeUnit FROM prices_it_b2b WHERE qev = '" + response.body.variantOptions[j].code + "'"}).then(result => {
+                      cy.task("dbQuery", {"query": "SELECT net, gross, taxRate, currency, runtime, runtimeUnit FROM prices_" + Cypress.env("market") + "_b2b WHERE qev = '" + response.body.variantOptions[j].code + "'"}).then(result => {
                           cy.softAssert(this.actualNetPrice,result[0].net)
                           cy.softAssert(this.actualGrossPrice, result[0].gross)
-                          //cy.softAssert(this.actualTaxRate,result[0].taxrate)
-                          cy.softAssert(this.actualTaxRate,10)
+                          cy.softAssert(this.actualTaxRate,result[0].taxrate)
+                          //cy.softAssert(this.actualTaxRate,10)
                           cy.softAssert(this.actualCurrency,result[0].currency)
                           cy.softAssert(this.actualRuntime,result[0].runtime)
                           cy.softAssert(this.actualRuntimeUnit,result[0].runtimeunit)
