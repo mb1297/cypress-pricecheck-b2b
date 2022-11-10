@@ -10,7 +10,7 @@ module.exports = defineConfig({
       preprod_api: "https://shop-preprod.mercedes-benz.com/dcpconb2b-api/dcp-api/v2/",
       base_store: "dcp-mbcb2b-de",
       market: "de",
-      language: "it_IT"
+      lang: "de_DE"
     }
   },
   db: {
